@@ -1,9 +1,22 @@
 import type { Request, Response } from 'express';
-import { registerUser } from '../services/auth.service.js';
+import { registerUser, authenticateUser } from '../services/auth.service.js';
 
-export const login = (_req: Request, res: Response) => {
-  // Lógica de autenticação será implementada aqui
-  res.send('Login controller');
+export const login = (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'E-mail e senha são obrigatórios.' });
+  }
+
+  const user = authenticateUser(email, password);
+
+  if (!user) {
+    return res.status(401).json({ message: 'E-mail ou senha inválidos.' });
+  }
+
+  // Nunca retorne a senha!
+  const { password: _, ...userWithoutPassword } = user;
+  res.status(200).json(userWithoutPassword);
 };
 
 export const register = (req: Request, res: Response) => {

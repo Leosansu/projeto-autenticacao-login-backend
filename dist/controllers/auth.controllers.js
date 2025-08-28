@@ -1,9 +1,28 @@
-export const login = (_req, res) => {
-    // Lógica de autenticação será implementada aqui
-    res.send('Login controller');
+import { registerUser, authenticateUser } from '../services/auth.service.js';
+export const login = (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({ message: 'E-mail e senha são obrigatórios.' });
+    }
+    const user = authenticateUser(email, password);
+    if (!user) {
+        return res.status(401).json({ message: 'E-mail ou senha inválidos.' });
+    }
+    // Nunca retorne a senha!
+    const { password: _, ...userWithoutPassword } = user;
+    res.status(200).json(userWithoutPassword);
 };
-export const register = (_req, res) => {
-    // Lógica de cadastro será implementada aqui
-    res.send('Register controller');
+export const register = (req, res) => {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: 'Nome, e-mail e senha são obrigatórios.' });
+    }
+    const user = registerUser(name, email, password);
+    if (!user) {
+        return res.status(409).json({ message: 'E-mail já cadastrado.' });
+    }
+    // Nunca retorne a senha!
+    const { password: _, ...userWithoutPassword } = user;
+    res.status(201).json(userWithoutPassword);
 };
 //# sourceMappingURL=auth.controllers.js.map
