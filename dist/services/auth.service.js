@@ -12,4 +12,7 @@ export function authenticateUser(email, password) {
     const user = users.find(user => user.email === email && user.password === password);
     return user || null;
 }
+export function getAllUsers() {
+    return users;
+}
 //# sourceMappingURL=auth.service.js.map

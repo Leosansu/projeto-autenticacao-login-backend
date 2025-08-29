@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=senha123
+      - DB_NAME=autenticacao
+    command: sh -c "npm install && npx tsc && node dist/index.js"
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: senha123
+      MYSQL_DATABASE: autenticacao
+    ports:
+      - "3307:3306" # Mude para 3307
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

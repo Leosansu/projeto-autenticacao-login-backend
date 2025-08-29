@@ -16,3 +16,7 @@ export function authenticateUser(email: string, password: string): User | null {
   const user = users.find(user => user.email === email && user.password === password);
   return user || null;
 }
+
+export function getAllUsers(): User[] {
+  return users;
+}

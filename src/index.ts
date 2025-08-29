@@ -1,6 +1,7 @@
 // Ponto de entrada da aplicação
 import express from 'express';
 import authRoutes from './routes/auth.routes.js'; // note o .js no final para ES Modules
+import 'dotenv/config';
 
 const app = express();
 app.use(express.json());

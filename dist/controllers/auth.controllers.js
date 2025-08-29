@@ -1,4 +1,4 @@
-import { registerUser, authenticateUser } from '../services/auth.service.js';
+import { registerUser, authenticateUser, getAllUsers } from '../services/auth.service.js';
 export const login = (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -17,6 +17,9 @@ export const register = (req, res) => {
     if (!name || !email || !password) {
         return res.status(400).json({ message: 'Nome, e-mail e senha são obrigatórios.' });
     }
+    if (password.length < 8) {
+        return res.status(400).json({ message: 'A senha deve ter no mínimo 8 caracteres.' });
+    }
     const user = registerUser(name, email, password);
     if (!user) {
         return res.status(409).json({ message: 'E-mail já cadastrado.' });
@@ -24,5 +27,9 @@ export const register = (req, res) => {
     // Nunca retorne a senha!
     const { password: _, ...userWithoutPassword } = user;
     res.status(201).json(userWithoutPassword);
+};
+export const listUsers = (_req, res) => {
+    const users = getAllUsers();
+    res.json(users);
 };
 //# sourceMappingURL=auth.controllers.js.map
