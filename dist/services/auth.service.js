@@ -1,18 +1,18 @@
-let users = [];
-let nextId = 1;
-export function registerUser(name, email, password) {
-    const exists = users.some(user => user.email === email);
-    if (exists)
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+export async function registerUser(name, email, password) {
+    const existing = await prisma.user.findUnique({ where: { email } });
+    if (existing)
         return null;
-    const newUser = { id: nextId++, name, email, password };
-    users.push(newUser);
-    return newUser;
+    return prisma.user.create({ data: { name, email, password } });
 }
-export function authenticateUser(email, password) {
-    const user = users.find(user => user.email === email && user.password === password);
-    return user || null;
+export async function getAllUsers() {
+    //Esse trecho deve ser removido e foi posto só para critério de testes manuais
+    return prisma.user.findMany({
+        select: { id: true, name: true, email: true, password: true } // inclui a senha
+    });
 }
-export function getAllUsers() {
-    return users;
+export async function authenticateUser(email, password) {
+    return prisma.user.findFirst({ where: { email, password } });
 }
 //# sourceMappingURL=auth.service.js.map

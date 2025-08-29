@@ -1,14 +1,14 @@
 import type { Request, Response } from 'express';
 import { registerUser, authenticateUser, getAllUsers } from '../services/auth.service.js';
 
-export const login = (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: 'E-mail e senha são obrigatórios.' });
   }
 
-  const user = authenticateUser(email, password);
+  const user = await authenticateUser(email, password);
 
   if (!user) {
     return res.status(401).json({ message: 'E-mail ou senha inválidos.' });
@@ -19,7 +19,7 @@ export const login = (req: Request, res: Response) => {
   res.status(200).json(userWithoutPassword);
 };
 
-export const register = (req: Request, res: Response) => {
+export const register = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -30,7 +30,7 @@ export const register = (req: Request, res: Response) => {
     return res.status(400).json({ message: 'A senha deve ter no mínimo 8 caracteres.' });
   }
 
-  const user = registerUser(name, email, password);
+  const user = await registerUser(name, email, password);
 
   if (!user) {
     return res.status(409).json({ message: 'E-mail já cadastrado.' });
@@ -41,7 +41,7 @@ export const register = (req: Request, res: Response) => {
   res.status(201).json(userWithoutPassword);
 };
 
-export const listUsers = (_req: Request, res: Response) => {
-  const users = getAllUsers();
+export const listUsers = async (_req: Request, res: Response) => {
+  const users = await getAllUsers();
   res.json(users);
 };

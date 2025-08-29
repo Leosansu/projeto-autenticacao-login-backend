@@ -1,10 +1,10 @@
 import { registerUser, authenticateUser, getAllUsers } from '../services/auth.service.js';
-export const login = (req, res) => {
+export const login = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(400).json({ message: 'E-mail e senha são obrigatórios.' });
     }
-    const user = authenticateUser(email, password);
+    const user = await authenticateUser(email, password);
     if (!user) {
         return res.status(401).json({ message: 'E-mail ou senha inválidos.' });
     }
@@ -12,7 +12,7 @@ export const login = (req, res) => {
     const { password: _, ...userWithoutPassword } = user;
     res.status(200).json(userWithoutPassword);
 };
-export const register = (req, res) => {
+export const register = async (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
         return res.status(400).json({ message: 'Nome, e-mail e senha são obrigatórios.' });
@@ -20,7 +20,7 @@ export const register = (req, res) => {
     if (password.length < 8) {
         return res.status(400).json({ message: 'A senha deve ter no mínimo 8 caracteres.' });
     }
-    const user = registerUser(name, email, password);
+    const user = await registerUser(name, email, password);
     if (!user) {
         return res.status(409).json({ message: 'E-mail já cadastrado.' });
     }
@@ -28,8 +28,8 @@ export const register = (req, res) => {
     const { password: _, ...userWithoutPassword } = user;
     res.status(201).json(userWithoutPassword);
 };
-export const listUsers = (_req, res) => {
-    const users = getAllUsers();
+export const listUsers = async (_req, res) => {
+    const users = await getAllUsers();
     res.json(users);
 };
 //# sourceMappingURL=auth.controllers.js.map
