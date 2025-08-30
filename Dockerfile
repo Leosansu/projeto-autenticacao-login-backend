@@ -16,6 +16,9 @@ COPY . .
 # Compila o TypeScript
 RUN npx tsc
 
+# Gera o Prisma Client para o ambiente do container
+RUN npx prisma generate
+
 # Expõe a porta da aplicação
 EXPOSE 3000
 

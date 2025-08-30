@@ -11,7 +11,7 @@ O objetivo é servir como exemplo para recrutadores e para quem deseja aprender 
 - Cadastro de usuário
 - Login de usuário (em desenvolvimento)
 - Estrutura de projeto organizada por camadas (controllers, services, models, routes)
-- Persistência de dados com MySQL e Prisma ORM
+- Simulação de banco de dados em memória
 
 ## Tecnologias utilizadas
 
