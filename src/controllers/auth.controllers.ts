@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { registerUser, authenticateUser, getAllUsers } from '../services/auth.service.js';
+import { registerUser, authenticateUser, getAllUsers } from '../services/auth.service';
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
