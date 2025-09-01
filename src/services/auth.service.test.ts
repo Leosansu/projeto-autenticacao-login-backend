@@ -2,6 +2,7 @@
 const mockFindUnique = jest.fn();
 const mockCreate = jest.fn();
 const mockFindMany = jest.fn();
+const mockFindFirst = jest.fn(); // Adicione o mock para findFirst
 
 // Só depois faça o mock do PrismaClient
 jest.mock('@prisma/client', () => {
@@ -11,13 +12,14 @@ jest.mock('@prisma/client', () => {
         findUnique: mockFindUnique,
         create: mockCreate,
         findMany: mockFindMany,
+        findFirst: mockFindFirst, // Inclua findFirst
       },
     })),
   };
 });
 
 // Importe as funções a serem testadas
-import { registerUser, getAllUsers } from './auth.service';
+import { registerUser, getAllUsers, authenticateUser } from './auth.service';
 
 describe('registerUser', () => {
   beforeEach(() => {
@@ -65,5 +67,26 @@ describe('getAllUsers', () => {
     mockFindMany.mockResolvedValue([]);
     const result = await getAllUsers();
     expect(result).toEqual([]);
+  });
+});
+
+describe('authenticateUser', () => {
+  beforeEach(() => {
+    mockFindFirst.mockReset();
+  });
+
+  it('deve retornar o usuário se credenciais forem válidas', async () => {
+    const user = { id: 1, name: 'A', email: 'a@email.com', password: '123' };
+    mockFindFirst.mockResolvedValue(user);
+    const result = await authenticateUser('a@email.com', '123');
+    expect(mockFindFirst).toHaveBeenCalledWith({ where: { email: 'a@email.com', password: '123' } });
+    expect(result).toEqual(user);
+  });
+
+  it('deve retornar null se credenciais forem inválidas', async () => {
+    mockFindFirst.mockResolvedValue(null);
+    const result = await authenticateUser('a@email.com', 'senhaErrada');
+    expect(mockFindFirst).toHaveBeenCalledWith({ where: { email: 'a@email.com', password: 'senhaErrada' } });
+    expect(result).toBeNull();
   });
 });
