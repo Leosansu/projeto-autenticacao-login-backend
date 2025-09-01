@@ -1,10 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 export async function registerUser(name, email, password) {
-    const existing = await prisma.user.findUnique({ where: { email } });
-    if (existing)
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+    if (existingUser) {
         return null;
-    return prisma.user.create({ data: { name, email, password } });
+    }
+    const newUser = await prisma.user.create({
+        data: { name, email, password },
+    });
+    return newUser;
 }
 export async function getAllUsers() {
     //Esse trecho deve ser removido e foi posto só para critério de testes manuais

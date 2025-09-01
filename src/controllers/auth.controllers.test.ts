@@ -1,5 +1,5 @@
-import { login, register, listUsers } from './auth.controllers';
-import * as authService from '../services/auth.service';
+import { login, register, listUsers } from './auth.controllers.js';
+import * as authService from '../services/auth.service.js';
 import jwt from 'jsonwebtoken';
 
 jest.mock('../services/auth.service');

@@ -19,7 +19,7 @@ jest.mock('@prisma/client', () => {
 });
 
 // Importe as funções a serem testadas
-import { registerUser, getAllUsers, authenticateUser } from './auth.service';
+import { registerUser, getAllUsers, authenticateUser } from './auth.service.js';
 
 describe('registerUser', () => {
   beforeEach(() => {
