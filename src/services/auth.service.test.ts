@@ -1,6 +1,7 @@
 // Declare os mocks primeiro
 const mockFindUnique = jest.fn();
 const mockCreate = jest.fn();
+const mockFindMany = jest.fn();
 
 // Só depois faça o mock do PrismaClient
 jest.mock('@prisma/client', () => {
@@ -9,13 +10,14 @@ jest.mock('@prisma/client', () => {
       user: {
         findUnique: mockFindUnique,
         create: mockCreate,
+        findMany: mockFindMany,
       },
     })),
   };
 });
 
-// Agora importe o registerUser
-import { registerUser } from './auth.service';
+// Importe as funções a serem testadas
+import { registerUser, getAllUsers } from './auth.service';
 
 describe('registerUser', () => {
   beforeEach(() => {
@@ -41,6 +43,27 @@ describe('registerUser', () => {
     });
     expect(result).toEqual(fakeUser);
   });
+});
 
+describe('getAllUsers', () => {
+  beforeEach(() => {
+    mockFindMany.mockReset();
+  });
 
+  it('deve retornar lista de usuários', async () => {
+    const users = [
+      { id: 1, name: 'A', email: 'a@email.com', password: '123' },
+      { id: 2, name: 'B', email: 'b@email.com', password: '456' },
+    ];
+    mockFindMany.mockResolvedValue(users);
+    const result = await getAllUsers();
+    expect(mockFindMany).toHaveBeenCalled();
+    expect(result).toEqual(users);
+  });
+
+  it('deve retornar lista vazia se não houver usuários', async () => {
+    mockFindMany.mockResolvedValue([]);
+    const result = await getAllUsers();
+    expect(result).toEqual([]);
+  });
 });

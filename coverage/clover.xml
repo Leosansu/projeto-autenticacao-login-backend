@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756749575049" clover="3.2.0">
-  <project timestamp="1756749575050" name="All files">
-    <metrics statements="12" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="1" elements="17" coveredelements="13" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
+<coverage generated="1756749980937" clover="3.2.0">
+  <project timestamp="1756749980937" name="All files">
+    <metrics statements="12" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="2" elements="17" coveredelements="15" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
     <file name="auth.service.ts" path="C:\Users\dilce\projeto_autenticacao_login\src\services\auth.service.ts">
-      <metrics statements="12" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="1"/>
+      <metrics statements="12" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="2"/>
       <line num="1" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
@@ -13,7 +13,7 @@
       <line num="10" count="1" type="stmt"/>
       <line num="13" count="1" type="stmt"/>
       <line num="16" count="1" type="stmt"/>
-      <line num="18" count="0" type="stmt"/>
+      <line num="18" count="2" type="stmt"/>
       <line num="23" count="1" type="stmt"/>
       <line num="24" count="0" type="stmt"/>
     </file>

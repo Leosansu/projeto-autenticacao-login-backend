@@ -4,9 +4,9 @@ FN:5,registerUser
 FN:16,getAllUsers
 FN:23,authenticateUser
 FNF:3
-FNH:1
+FNH:2
 FNDA:2,registerUser
-FNDA:0,getAllUsers
+FNDA:2,getAllUsers
 FNDA:0,authenticateUser
 DA:1,1
 DA:3,1
@@ -17,11 +17,11 @@ DA:8,1
 DA:10,1
 DA:13,1
 DA:16,1
-DA:18,0
+DA:18,2
 DA:23,1
 DA:24,0
 LF:12
-LH:10
+LH:11
 BRDA:7,0,0,1
 BRDA:7,0,1,1
 BRF:2
