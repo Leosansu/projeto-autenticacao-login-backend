@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { registerUser, authenticateUser, getAllUsers } from '../services/auth.service.js';
 export const login = async (req, res) => {
     const { email, password } = req.body;
@@ -6,11 +7,12 @@ export const login = async (req, res) => {
     }
     const user = await authenticateUser(email, password);
     if (!user) {
-        return res.status(401).json({ message: 'E-mail ou senha inválidos.' });
+        return res.status(401).json({ message: 'Usuário ou senha inválidos' });
     }
-    // Nunca retorne a senha!
-    const { password: _, ...userWithoutPassword } = user;
-    res.status(200).json(userWithoutPassword);
+    // Gere o token JWT
+    const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET || 'secreta123', // Use uma variável de ambiente em produção!
+    { expiresIn: '1h' });
+    res.json({ token });
 };
 export const register = async (req, res) => {
     const { name, email, password } = req.body;
