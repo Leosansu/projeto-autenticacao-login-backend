@@ -10,9 +10,9 @@ export const login = async (req, res) => {
         return res.status(401).json({ message: 'Usuário ou senha inválidos' });
     }
     // Gere o token JWT
-    const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET || 'secreta123', // Use uma variável de ambiente em produção!
-    { expiresIn: '1h' });
-    res.json({ token });
+    const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET || 'secreta123', { expiresIn: '1h' });
+    // Inclui o nome do usuário na resposta
+    res.json({ token, nome: user.name });
 };
 export const register = async (req, res) => {
     const { name, email, password } = req.body;

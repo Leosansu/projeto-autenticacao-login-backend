@@ -18,11 +18,12 @@ export const login = async (req: Request, res: Response) => {
   // Gere o token JWT
   const token = jwt.sign(
     { userId: user.id, email: user.email },
-    process.env.JWT_SECRET || 'secreta123', // Use uma variável de ambiente em produção!
+    process.env.JWT_SECRET || 'secreta123',
     { expiresIn: '1h' }
   );
 
-  res.json({ token });
+  // Inclui o nome do usuário na resposta
+  res.json({ token, nome: user.name });
 };
 
 export const register = async (req: Request, res: Response) => {
