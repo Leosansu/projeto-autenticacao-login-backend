@@ -41,4 +41,19 @@ describe('authenticateToken', () => {
     authenticateToken(req as Request, res as Response, next);
     expect(res.status).toHaveBeenCalledWith(403);
   });
+
+  it('deve adicionar user ao req e chamar next se o token for válido', () => {
+    if (!req.headers) req.headers = {};
+    req.headers['authorization'] = 'Bearer token_valido';
+    const fakeUser = { id: 1, name: 'Test' };
+    vi.spyOn(jwt, 'verify').mockImplementation((_token, _secret, callback) => {
+      callback(null, fakeUser);
+    });
+
+    authenticateToken(req as Request, res as Response, next);
+    expect((req as any).user).toEqual(fakeUser);
+    expect(next).toHaveBeenCalled();
+    expect(res.status).not.toHaveBeenCalledWith(401);
+    expect(res.status).not.toHaveBeenCalledWith(403);
+  });
 });

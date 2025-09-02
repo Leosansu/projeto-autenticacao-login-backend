@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756816338491" clover="3.2.0">
-  <project timestamp="1756816338491" name="All files">
-    <metrics statements="54" coveredstatements="8" conditionals="37" coveredconditionals="2" methods="9" coveredmethods="3" elements="100" coveredelements="13" complexity="0" loc="54" ncloc="54" packages="6" files="6" classes="6"/>
+<coverage generated="1756820211096" clover="3.2.0">
+  <project timestamp="1756820211096" name="All files">
+    <metrics statements="54" coveredstatements="7" conditionals="37" coveredconditionals="8" methods="9" coveredmethods="2" elements="100" coveredelements="17" complexity="0" loc="54" ncloc="54" packages="6" files="6" classes="6"/>
     <package name="src">
       <metrics statements="7" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="index.ts" path="C:/Users/dilce/projeto_autenticacao_login/src/index.ts">
@@ -56,16 +56,16 @@
       </file>
     </package>
     <package name="src.middlewares">
-      <metrics statements="7" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="7" coveredstatements="7" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
       <file name="auth.middleware.ts" path="C:/Users/dilce/projeto_autenticacao_login/src/middlewares/auth.middleware.ts">
-        <metrics statements="7" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <metrics statements="7" coveredstatements="7" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.routes">
@@ -79,17 +79,17 @@
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="auth.service.ts" path="C:/Users/dilce/projeto_autenticacao_login/src/services/auth.service.ts">
-        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="6" count="6" type="stmt"/>
-        <line num="7" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="10" count="5" type="stmt"/>
-        <line num="13" count="5" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
+        <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
       </file>
     </package>
   </project>
