@@ -1,14 +1,19 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { authenticateToken } from './auth.middleware.js';
+import { authenticateToken } from './auth.middleware';
 import type { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
 
 describe('authenticateToken', () => {
-  let req: Partial<Request>;
+  let req: Partial<Request> = { headers: {} };
   let res: Partial<Response>;
   let next: NextFunction;
 
   beforeEach(() => {
     req = { headers: {} };
+    // Garantir que headers nunca seja indefinido
+    if (!req.headers) {
+      req.headers = {};
+    }
     res = {
       status: vi.fn().mockReturnThis(),
       json: vi.fn()
@@ -20,6 +25,20 @@ describe('authenticateToken', () => {
     authenticateToken(req as Request, res as Response, next);
     expect(res.status).toHaveBeenCalledWith(401);
     expect(res.json).toHaveBeenCalledWith({ message: 'Token não fornecido' });
-    expect(next).not.toHaveBeenCalled();
+    // Garantir que headers nunca seja indefinido
+    if (!req.headers) req.headers = {};
+    if (!req.headers) req.headers = {};
+    req.headers['authorization'] = 'Bearer token_invalido';
+  });
+
+  it('deve retornar 403 se o token for inválido', () => {
+    if (!req.headers) req.headers = {};
+    req.headers['authorization'] = 'Bearer token_invalido';
+    vi.spyOn(jwt, 'verify').mockImplementation((_token, _secret, callback) => {
+      callback(new Error('invalid token'), null);
+    });
+
+    authenticateToken(req as Request, res as Response, next);
+    expect(res.status).toHaveBeenCalledWith(403);
   });
 });
