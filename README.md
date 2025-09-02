@@ -100,7 +100,11 @@ O objetivo é servir como exemplo para recrutadores e para quem deseja aprender 
 
 - Para rodar os testes unitários:
   ```
-  npm test
+  npx vitest run
+  ```
+- Para gerar relatório de cobertura:
+  ```
+  npx vitest run --coverage
   ```
 - Testes cobrem:
   - Services: cadastro, autenticação e listagem de usuários
