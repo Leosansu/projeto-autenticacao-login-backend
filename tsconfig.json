@@ -9,8 +9,14 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "types": ["jest"],
-    "sourceMap": true
+    "types": ["vitest"],
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@services/*": ["src/services/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@controllers/*": ["src/controllers/*"]
+    }
   },
   "include": ["src/**/*"]
 }

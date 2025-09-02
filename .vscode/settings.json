@@ -1,3 +1,4 @@
 {
-    "CodeGPT.apiKey": "Anthropic"
+    "CodeGPT.apiKey": "Anthropic",
+    "codium.codeCompletion.enable": true
 }
