@@ -30,4 +30,22 @@ describe('login controller', () => {
     expect(res.status).toHaveBeenCalledWith(401);
     expect(res.json).toHaveBeenCalledWith({ message: 'Usuário ou senha inválidos' });
   });
+
+  it('deve retornar token e nome do usuário se login for bem-sucedido', async () => {
+    const req: any = { body: { email: 'teste@exemplo.com', password: 'senha123' } };
+    const res: any = {
+      status: vi.fn().mockReturnThis(),
+      json: vi.fn()
+    };
+
+    const fakeUser = { id: 1, name: 'Usuário Teste', email: 'teste@exemplo.com' };
+    vi.spyOn(authService, 'authenticateUser').mockResolvedValue(fakeUser);
+
+    // Mock do jwt.sign para retornar um token fixo
+    vi.spyOn(require('jsonwebtoken'), 'sign').mockReturnValue('fake-token');
+
+    await login(req, res);
+
+    expect(res.json).toHaveBeenCalledWith({ token: 'fake-token', nome: fakeUser.name });
+  });
 });
